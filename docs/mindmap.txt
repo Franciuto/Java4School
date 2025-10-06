@@ -1,0 +1,10 @@
+[Classe]
+   │
+   ├──> attributi (dati, stato)
+   │       - String title
+   │       - int duration
+   │
+   └──> metodi (azioni, comportamento)
+           - play()
+           - stop()
+           - getTitle()

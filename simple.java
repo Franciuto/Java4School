@@ -1,4 +1,4 @@
-public class aura {
+public class simple {
     public static void main(String[] args) {
         int n = 3;
         if (n < 0) {
