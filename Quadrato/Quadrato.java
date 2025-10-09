@@ -1,3 +1,4 @@
+// Translate to english
 public class Quadrato {
     private Punto centro;
     private double lato;
