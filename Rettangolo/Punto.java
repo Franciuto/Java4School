@@ -3,7 +3,7 @@ public class Punto {
     private double x;
     
     // 1st constructor
-    public Punto(double x, double y) {
+    Punto(double x, double y) {
         this.x = x;
         this.y = y;
     }

@@ -11,7 +11,7 @@ public class Libro {
         this.pageN = pageN;
     }
     
-    // Getter + Setter
+    // Getter + Settern
     public String getTitle() {
         return title;
     }
