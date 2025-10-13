@@ -11,19 +11,19 @@ public class Rettangolo {
     }
 
     // Getters and Setters
-    public float getBase() {
+    public double getBase() {
         return base;
     }
 
-    public void setBase(float base) {
+    public void setBase(double base) {
         this.base = base;
     }
 
-    public float getheight() {
+    public double getheight() {
         return height;
     }
 
-    public void setheight(float height) {
+    public void setheight(double height) {
         this.height = height;
     }
 
