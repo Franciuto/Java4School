@@ -42,7 +42,15 @@ public class Manager {
         return programStack.size();
     }
 
-    public static void main(String[] args) {
-        
+    public int searchProgram(String toFind) {
+        for (int i = 0; i < programStack.size(); i++) {
+            if (programStack.get(i).getTitle().equals(toFind)) {
+                return i;
+            }
+        }
+        return -1;
     }
+
+    
+
 }
