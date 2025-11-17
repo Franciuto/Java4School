@@ -26,6 +26,8 @@ public class GestioneVoti {
             double media = (double) sommaVoti / votiValidi;
             System.out.printf("Media dei voti validi: %.2f%n", media);
         } else {
+            new Throwable(
+            );
             System.out.println("Nessun voto valido.");
         }
     }
