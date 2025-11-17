@@ -1,19 +1,19 @@
 public class Abitazione {
-    private String numeroStanze;
+    private int numeroStanze;
     private double superficie;
     private String città;
 
-    public Abitazione(String numeroStanze, double superficie, String città) {
+    public Abitazione(int numeroStanze, double superficie, String città) {
         this.numeroStanze = numeroStanze;
         this.superficie = superficie;
         this.città = città;
     }
 
-    public String getNumeroStanze() {
+    public int getNumeroStanze() {
         return numeroStanze;
     }
 
-    public void setNumeroStanze(String numeroStanze) {
+    public void setNumeroStanze(int numeroStanze) {
         this.numeroStanze = numeroStanze;
     }
 

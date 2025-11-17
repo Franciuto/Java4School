@@ -3,7 +3,7 @@ public class Appartamento extends Abitazione {
     private boolean raggiungibileAscensore;
     private int numeroTerrazzi;
 
-    public Appartamento(String numeroStanze, double superficie, String città, int piano, boolean raggiungibileAscensore,
+    public Appartamento(int numeroStanze, double superficie, String città, int piano, boolean raggiungibileAscensore,
             int numeroTerrazzi) {
         super(numeroStanze, superficie, città);
         this.piano = piano;

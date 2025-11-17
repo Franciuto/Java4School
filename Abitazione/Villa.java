@@ -3,7 +3,7 @@ public class Villa extends Abitazione {
     private boolean withGiardino;
     private boolean withPiscina;
 
-    public Villa(String numeroStanze, double superficie, String città, int numeroPiani, boolean withGiardino,
+    public Villa(int numeroStanze, double superficie, String città, int numeroPiani, boolean withGiardino,
             boolean withPiscina) {
         super(numeroStanze, superficie, città);
         this.numeroPiani = numeroPiani;
