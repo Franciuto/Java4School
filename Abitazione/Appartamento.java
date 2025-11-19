@@ -34,5 +34,4 @@ public class Appartamento extends Abitazione {
     public void setNumeroTerrazzi(int numeroTerrazzi) {
         this.numeroTerrazzi = numeroTerrazzi;
     }
-
 }
