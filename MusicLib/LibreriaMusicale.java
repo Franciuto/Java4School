@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 public class LibreriaMusicale {
     private String titolo;
@@ -17,7 +19,7 @@ public class LibreriaMusicale {
 
     public boolean aggiungiBrano(Brano b) {
         if (!libreria.contains(b)) {
-            libreria.add(b);
+            return libreria.add(b);
         } else {
             throw new IllegalArgumentException("Brano già presente nella libreria");
         }
@@ -34,12 +36,12 @@ public class LibreriaMusicale {
 
         for (Brano b : libreria) {
             if (b.getTitolo().toLowerCase().equals(t) &&
-            .toLowerCase        b.getArtista().equalsIgnoreCase(a)) {
+            b.getArtista().equalsIgnoreCase(a)) {
 
                 return (int) (b.getDurataSec() / 60);
             }
         }
-        throw new BranoNonTrovatoException(String.format("Il brano %s con autore %s non è nella libreria", titolo, autore))
+        throw new BranoNonTrovatoException(String.format("Il brano %s con autore %s non è nella libreria", titolo, artista));
         
     }
 
@@ -69,6 +71,7 @@ public class LibreriaMusicale {
                 braniPerArtista++;
             }
         }
+        return braniPerArtista;
     }
 
     public Brano piuAscoltato() {
@@ -99,4 +102,33 @@ public class LibreriaMusicale {
         }
         return best;
     }
+
+    public ArrayList<Brano> shuffleConSeed(String genere, int durataMax) {
+        ArrayList<Brano> genereSort = braniPerGenere(genere);
+        int durataEffettiva = 0;
+        ArrayList<Brano> result = new ArrayList<>();
+
+        for (Brano b : genereSort) {
+            if (durataEffettiva + b.getDurataSec() <= durataMax) {
+                durataEffettiva += b.getDurataSec();
+                result.add(b);
+            }
+        }
+
+        long seed = new Random().nextLong();
+        Random random = new Random(seed);
+
+        Collections.shuffle(result, random);
+        return result;
+    }
+
+    public double getDurataMediaBrani() {
+        int sum = 0;
+        for (Brano b : libreria) {
+            sum += b.getDurataSec();
+        }
+        
+        return sum / libreria.size();
+    }
+
 }
