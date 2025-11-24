@@ -193,6 +193,13 @@ public class Main {
         } catch (IllegalArgumentException e) {
             System.out.println("✓ Eccezione corretta per ascolti negativi: " + e.getMessage());
         }
+
+        int minuti = 0;
+        try {
+            minuti = libreria.getMinutiAscoltati("aaaa", "artistaaaaa");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         
         System.out.println("\n=== TUTTI I TEST COMPLETATI ===");
         System.out.println("✓ Tutti i metodi sono stati testati con successo!");
