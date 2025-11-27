@@ -4,14 +4,14 @@ public class Libro extends Pubbliczione {
     private String autore;
     private String ISBN;
 
-//constructor
-    public Libro(String titolo, LocalDate dataPubblicazione, int numeroDiPagine, boolean isBorrowed, String autore, String ISBN){
-        super(titolo, dataPubblicazione, numeroDiPagine, isBorrowed);
+//costruttore
+    public Libro(String titolo, LocalDate dataPubblicazione, int numeroDiPagine, boolean prestato, String autore, String ISBN){
+        super(titolo, dataPubblicazione, numeroDiPagine, prestato);
         this.autore = autore;
         this.ISBN = ISBN;
     }
 
-//getters
+//metodi getter
     public String getAutore() {
         return autore;
     }
@@ -19,7 +19,7 @@ public class Libro extends Pubbliczione {
         return ISBN;
     }
 
-//setters
+//metodi setter
     public void setAutore(String autore) {
         this.autore = autore;
     }
@@ -27,10 +27,10 @@ public class Libro extends Pubbliczione {
         this.ISBN = iSBN;
     }
     @Override
-    public void setReturnDate() {
-        this.returnDate = LocalDate.now().plusDays(60);
+    public void setDataRestituzione() {
+        this.dataRestituzione = LocalDate.now().plusDays(60);
     }
-//methods
+//metodi
     public String toString() {
         return (super.toString() + ", autore=" + autore + ", ISBN=" + ISBN + "]");
     }

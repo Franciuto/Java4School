@@ -3,24 +3,24 @@ import java.util.ArrayList;
 public class Biblioteca {
     private ArrayList<Pubbliczione> biblioteca;
 
-//constructor
-    public Biblioteca(boolean isBorrowed) {
+//costruttore
+    public Biblioteca(boolean prestato) {
         this.biblioteca = new ArrayList<Pubbliczione>();
     }
 
-//getters
+//metodi getter
     public ArrayList<Pubbliczione> getBiblioteca() {
         return biblioteca;
     }
-//setters
+//metodi setter
     public void setBiblioteca(ArrayList<Pubbliczione> biblioteca) {
         this.biblioteca = biblioteca;
     }
 
-//methods
+//metodi
 /**
  * @param (Pubbliczione)
- * add a new pubblicazione
+ * aggiunge una nuova pubblicazione
  */
     public void aggiungiPubbliczione(Pubbliczione p) {
         try {
@@ -37,7 +37,7 @@ public class Biblioteca {
     }
     /**
      * @param (int)
-     * remove a pubbliczione by id
+     * rimuove una pubblicazione tramite id
      */
     public void rimuoviPubbliczione(int id) {
         for (Pubbliczione p : biblioteca) {
@@ -47,7 +47,7 @@ public class Biblioteca {
     }
 /**
  * @param (int)
- * borrow a pubbliczione
+ * prende in prestito una pubblicazione
  */
     public void chiediPubblicazioneInPrestito(int id){
         int flag = 0;
@@ -59,9 +59,9 @@ public class Biblioteca {
         for(Pubbliczione p : biblioteca){
             if(p.getId() == id){
                 flag = 1;
-                if(p.getReturnDate() != null) p.setReturnDate();
+                if(p.getDataRestituzione() != null) p.setDataRestituzione();
                 else{
-                    System.out.println("Pubblicazione sarà disponibile a partire dal: " + p.getReturnDate());
+                    System.out.println("Pubblicazione sarà disponibile a partire dal: " + p.getDataRestituzione());
                 }
             }
         }
@@ -73,11 +73,11 @@ public class Biblioteca {
     }
 /**
  * @param (Pubbliczione)
- * return a pubbliczione
+ * restituisce una pubblicazione
  */
     public void restituisciPubblicazione(Pubbliczione p){
         try {
-            if(!p.isBorrowed()) throw new IllegalArgumentException("Pubblicazione non in prestito");
+            if(!p.isPrestato()) throw new IllegalArgumentException("Pubblicazione non in prestito");
             if(!biblioteca.contains(p)) throw new IllegalArgumentException("Pubblicazione non appartiene a questa biblioteca");
         } catch (Exception e) {
             System.out.println(e.getMessage());

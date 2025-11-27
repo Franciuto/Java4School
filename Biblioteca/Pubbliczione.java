@@ -4,22 +4,22 @@ public class Pubbliczione {
     protected String titolo;
     protected int id;
     protected LocalDate dataPubblicazione;
-    protected LocalDate returnDate;
-    protected boolean isBorrowed;
+    protected LocalDate dataRestituzione;
+    protected boolean prestato;
     protected int numeroDiPagine;
     public static int num = 0;
 
-    //constructor
-        public Pubbliczione(String titolo, LocalDate dataPubblicazione, int numeroDiPagine, boolean isBorrowed) {
+    //costruttore
+        public Pubbliczione(String titolo, LocalDate dataPubblicazione, int numeroDiPagine, boolean prestato) {
             this.titolo = titolo;
             num++;
             this.id = num;
             this.dataPubblicazione = dataPubblicazione;
             this.numeroDiPagine = numeroDiPagine;
-            this.isBorrowed = isBorrowed;
+            this.prestato = prestato;
         }
 
-//getters
+//metodi getter
     public String getTitolo() {
         return titolo;
     }
@@ -34,13 +34,13 @@ public class Pubbliczione {
     public int getNumeroDiPagine() {
         return numeroDiPagine;
     }
-    public LocalDate getReturnDate() {
-        return returnDate;
+    public LocalDate getDataRestituzione() {
+        return dataRestituzione;
     }
-    public boolean isBorrowed() {
-        return isBorrowed;
+    public boolean isPrestato() {
+        return prestato;
     }
-//setters
+//metodi setter
     public void setTitolo(String titolo) {
         this.titolo = titolo;
     }
@@ -53,13 +53,13 @@ public class Pubbliczione {
     public void setNumeroDiPagine(int numeroDiPagine) {
         this.numeroDiPagine = numeroDiPagine;
     }
-    public void setReturnDate() {
-        this.returnDate = null;
+    public void setDataRestituzione() {
+        this.dataRestituzione = null;
     }
-    
-//methods
+
+//metodi
     public String toString() {
         return "Pubbliczione [titolo=" + titolo + ", id=" + id + ", dataPubblicazione=" + dataPubblicazione
-                + ", numeroDiPagine=" + numeroDiPagine + ", isBorrowed=" + isBorrowed + ", returnDate=" + returnDate + "]";
+                + ", numeroDiPagine=" + numeroDiPagine + ", prestato=" + prestato + ", dataRestituzione=" + dataRestituzione + "]";
     }
 }

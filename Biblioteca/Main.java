@@ -14,19 +14,19 @@ public class Main {
         biblioteca.aggiungiPubbliczione(p1);
         biblioteca.aggiungiPubbliczione(p2);
 
-        System.out.println("Biblioteca contents:");
+        System.out.println("Contenuto della biblioteca:");
         for (Pubbliczione p : biblioteca.getBiblioteca()) {
             System.out.println(p);
         }
 
         biblioteca.chiediPubblicazioneInPrestito(l1.getId());
-        System.out.println("\nAfter borrowing a book:");
+        System.out.println("\nDopo aver preso in prestito un libro:");
         for (Pubbliczione p : biblioteca.getBiblioteca()) {
             System.out.println(p);
         }
 
         biblioteca.restituisciPubblicazione(l1);
-        System.out.println("\nAfter returning the book:");
+        System.out.println("\nDopo aver restituito il libro:");
         for (Pubbliczione p : biblioteca.getBiblioteca()) {
             System.out.println(p);
         }
