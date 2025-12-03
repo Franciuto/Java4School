@@ -1,88 +1,101 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Biblioteca {
-    private ArrayList<Pubbliczione> biblioteca;
+    private ArrayList<Pubbliczione> archivio;
 
-//costruttore
-    public Biblioteca(boolean prestato) {
-        this.biblioteca = new ArrayList<Pubbliczione>();
+    public Biblioteca(boolean parametroInutile) {
+        this.archivio = new ArrayList<>();
     }
 
-//metodi getter
-    public ArrayList<Pubbliczione> getBiblioteca() {
-        return biblioteca;
-    }
-//metodi setter
-    public void setBiblioteca(ArrayList<Pubbliczione> biblioteca) {
-        this.biblioteca = biblioteca;
+    public ArrayList<Pubbliczione> ottieniArchivio() {
+        return archivio;
     }
 
-//metodi
-/**
- * @param (Pubbliczione)
- * aggiunge una nuova pubblicazione
- */
-    public void aggiungiPubbliczione(Pubbliczione p) {
+    public void sostituisciArchivio(ArrayList<Pubbliczione> nuovoArchivio) {
+        this.archivio = nuovoArchivio;
+    }
+
+    public void inserisciNuovoDocumento(Pubbliczione documento) {
         try {
-            if (p == null) throw new IllegalArgumentException("Pubbliczione non valida");
-            for (Pubbliczione pub : biblioteca) {
-                if (pub.getId() == p.getId()) {
-                    throw new IllegalArgumentException("Pubbliczione con ID duplicato");
+            if (documento == null) {
+                throw new IllegalArgumentException("Documento non valido");
+            }
+            for (Pubbliczione elem : archivio) {
+                if (elem.ottieniCodice() == documento.ottieniCodice()) {
+                    throw new IllegalArgumentException("Documento con codice duplicato");
                 }
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        biblioteca.add(p);
-    }
-    /**
-     * @param (int)
-     * rimuove una pubblicazione tramite id
-     */
-    public void rimuoviPubbliczione(int id) {
-        for (Pubbliczione p : biblioteca) {
-            if(p.getId() == id)
-                biblioteca.remove(p);
-        }
-    }
-/**
- * @param (int)
- * prende in prestito una pubblicazione
- */
-    public void chiediPubblicazioneInPrestito(int id){
-        int flag = 0;
-        try {
-            if(id == 0) throw new IllegalArgumentException("Pubblicazione non trovata");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        for(Pubbliczione p : biblioteca){
-            if(p.getId() == id){
-                flag = 1;
-                if(p.getDataRestituzione() != null) p.setDataRestituzione();
-                else{
-                    System.out.println("Pubblicazione sarà disponibile a partire dal: " + p.getDataRestituzione());
-                }
-            }
-        }
-        try {
-            if(flag==0) throw new IllegalArgumentException("Pubblicazione non trovata");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-/**
- * @param (Pubbliczione)
- * restituisce una pubblicazione
- */
-    public void restituisciPubblicazione(Pubbliczione p){
-        try {
-            if(!p.isPrestato()) throw new IllegalArgumentException("Pubblicazione non in prestito");
-            if(!biblioteca.contains(p)) throw new IllegalArgumentException("Pubblicazione non appartiene a questa biblioteca");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return;
+            archivio.add(documento);
+        } catch (Exception errore) {
+            System.out.println(errore.getMessage());
         }
     }
 
+    public void eliminaDocumento(int codice) {
+        Iterator<Pubbliczione> iteratore = archivio.iterator();
+        while (iteratore.hasNext()) {
+            Pubbliczione elemento = iteratore.next();
+            if (elemento.ottieniCodice() == codice) {
+                iteratore.remove();
+                break;
+            }
+        }
+    }
+
+    public Pubbliczione cercaPerCodice(int codice) {
+        for (Pubbliczione elemento : archivio) {
+            if (codice == elemento.ottieniCodice()) {
+                return elemento;
+            }
+        }
+        return null;
+    }
+
+    public String richiediInPrestito(int codice) {
+        boolean trovato = false;
+        try {
+            if (codice == 0) {
+                throw new IllegalArgumentException("Documento non trovato");
+            }
+        } catch (Exception errore) {
+            return errore.getMessage();
+        }
+
+        for (Pubbliczione elemento : archivio) {
+            if (elemento.ottieniCodice() == codice) {
+                trovato = true;
+                if (elemento.ottieniScadenzaPrestito() == null) {
+                    elemento.impostaScadenzaPrestito();
+                } else {
+                    return "Documento disponibile dal: " + elemento.ottieniScadenzaPrestito();
+                }
+            }
+        }
+
+        if (!trovato) {
+            return "Documento non trovato";
+        }
+
+        Pubbliczione documentoTrovato = cercaPerCodice(codice);
+        if (documentoTrovato == null) {
+            return "Documento non trovato";
+        }
+
+        return "Prestito effettuato! Restituzione entro: " + documentoTrovato.ottieniScadenzaPrestito();
+    }
+
+    public void effettuaRestituzione(Pubbliczione documento) {
+        try {
+            if (!documento.verificaSeInUso()) {
+                throw new IllegalArgumentException("Documento non in prestito");
+            }
+            if (!archivio.contains(documento)) {
+                throw new IllegalArgumentException("Documento non di questa biblioteca");
+            }
+            documento.resetScadenza();
+        } catch (Exception errore) {
+            System.out.println(errore.getMessage());
+        }
+    }
 }

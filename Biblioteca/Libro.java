@@ -1,37 +1,44 @@
 import java.time.LocalDate;
 
 public class Libro extends Pubbliczione {
-    private String autore;
-    private String ISBN;
+    private String scrittore;
+    private String codiceISBN;
 
-//costruttore
-    public Libro(String titolo, LocalDate dataPubblicazione, int numeroDiPagine, boolean prestato, String autore, String ISBN){
-        super(titolo, dataPubblicazione, numeroDiPagine, prestato);
-        this.autore = autore;
-        this.ISBN = ISBN;
-    }
-
-//metodi getter
-    public String getAutore() {
-        return autore;
-    }
-    public String getISBN() {
-        return ISBN;
+    public Libro(String nome, LocalDate dataRilascio, int quantitaPagine, boolean inUso, String scrittore, String codiceISBN){
+        super(nome, dataRilascio, quantitaPagine, inUso);
+        this.scrittore = scrittore;
+        this.codiceISBN = codiceISBN;
     }
 
-//metodi setter
-    public void setAutore(String autore) {
-        this.autore = autore;
+    public String ottieniScrittore() {
+        return scrittore;
     }
-    public void setISBN(String iSBN) {
-        this.ISBN = iSBN;
+
+    public String ottieniCodiceISBN() {
+        return codiceISBN;
     }
+
+    public void modificaScrittore(String scrittore) {
+        this.scrittore = scrittore;
+    }
+
+    public void modificaCodiceISBN(String codiceISBN) {
+        this.codiceISBN = codiceISBN;
+    }
+
     @Override
-    public void setDataRestituzione() {
-        this.dataRestituzione = LocalDate.now().plusDays(60);
+    public void impostaScadenzaPrestito() {
+        this.scadenzaPrestito = LocalDate.now().plusDays(60);
+        this.inUso = true;
     }
-//metodi
+
+    @Override
+    public String mostraDettagli() {
+        return super.mostraDettagli() + " | Autore: " + scrittore + " | ISBN: " + codiceISBN;
+    }
+
+    @Override
     public String toString() {
-        return (super.toString() + ", autore=" + autore + ", ISBN=" + ISBN + "]");
+        return mostraDettagli();
     }
 }

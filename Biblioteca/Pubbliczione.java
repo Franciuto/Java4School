@@ -1,65 +1,83 @@
 import java.time.LocalDate;
 
-public class Pubbliczione {
-    protected String titolo;
-    protected int id;
-    protected LocalDate dataPubblicazione;
-    protected LocalDate dataRestituzione;
-    protected boolean prestato;
-    protected int numeroDiPagine;
-    public static int num = 0;
+public abstract class Pubbliczione {
+    protected String nome;
+    protected int codice;
+    protected LocalDate dataRilascio;
+    protected LocalDate scadenzaPrestito;
+    protected boolean inUso;
+    protected int quantitaPagine;
+    private static int contatore = 0;
 
-    //costruttore
-        public Pubbliczione(String titolo, LocalDate dataPubblicazione, int numeroDiPagine, boolean prestato) {
-            this.titolo = titolo;
-            num++;
-            this.id = num;
-            this.dataPubblicazione = dataPubblicazione;
-            this.numeroDiPagine = numeroDiPagine;
-            this.prestato = prestato;
-        }
-
-//metodi getter
-    public String getTitolo() {
-        return titolo;
-    }
-    public int getId() {
-        return id;
+    public Pubbliczione(String nome, LocalDate dataRilascio, int quantitaPagine, boolean inUso) {
+        this.nome = nome;
+        this.codice = ++contatore;
+        this.dataRilascio = dataRilascio;
+        this.quantitaPagine = quantitaPagine;
+        this.inUso = inUso;
+        this.scadenzaPrestito = null;
     }
 
-    public LocalDate getDataPubblicazione() {
-        return dataPubblicazione;
+    public String ottieniNome() {
+        return nome;
     }
 
-    public int getNumeroDiPagine() {
-        return numeroDiPagine;
-    }
-    public LocalDate getDataRestituzione() {
-        return dataRestituzione;
-    }
-    public boolean isPrestato() {
-        return prestato;
-    }
-//metodi setter
-    public void setTitolo(String titolo) {
-        this.titolo = titolo;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public void setDataPubblicazione(LocalDate dataPubblicazione) {
-        this.dataPubblicazione = dataPubblicazione;
-    }
-    public void setNumeroDiPagine(int numeroDiPagine) {
-        this.numeroDiPagine = numeroDiPagine;
-    }
-    public void setDataRestituzione() {
-        this.dataRestituzione = null;
+    public int ottieniCodice() {
+        return codice;
     }
 
-//metodi
+    public LocalDate ottieniDataRilascio() {
+        return dataRilascio;
+    }
+
+    public int ottieniQuantitaPagine() {
+        return quantitaPagine;
+    }
+
+    public LocalDate ottieniScadenzaPrestito() {
+        return scadenzaPrestito;
+    }
+
+    public boolean verificaSeInUso() {
+        return inUso;
+    }
+
+    public void modificaNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void modificaCodice(int codice) {
+        this.codice = codice;
+    }
+
+    public void modificaDataRilascio(LocalDate dataRilascio) {
+        this.dataRilascio = dataRilascio;
+    }
+
+    public void modificaQuantitaPagine(int quantitaPagine) {
+        this.quantitaPagine = quantitaPagine;
+    }
+
+    public abstract void impostaScadenzaPrestito();
+
+    public void resetScadenza() {
+        this.scadenzaPrestito = null;
+        this.inUso = false;
+    }
+
+    public String mostraDettagli() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Opera: ").append(nome);
+        sb.append(" | Codice: ").append(codice);
+        sb.append(" | Data: ").append(dataRilascio);
+        sb.append(" | Pagine: ").append(quantitaPagine);
+        sb.append(" | In prestito: ").append(inUso);
+        sb.append(" | Scadenza: ").append(scadenzaPrestito);
+        return sb.toString();
+    }
+
+    @Override
     public String toString() {
-        return "Pubbliczione [titolo=" + titolo + ", id=" + id + ", dataPubblicazione=" + dataPubblicazione
-                + ", numeroDiPagine=" + numeroDiPagine + ", prestato=" + prestato + ", dataRestituzione=" + dataRestituzione + "]";
+        return mostraDettagli();
     }
 }

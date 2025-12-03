@@ -1,29 +1,34 @@
 import java.time.LocalDate;
 
 public class Rivista extends Pubbliczione {
-    private boolean isPatinata;
+    private boolean copertinaPatinatata;
 
-//costruttore
-    public Rivista(String titolo, LocalDate dataPubblicazione, int numeroDiPagine, boolean isPatinata, boolean prestato) {
-        super(titolo, dataPubblicazione, numeroDiPagine, prestato);
-        this.isPatinata = isPatinata;
+    public Rivista(String nome, LocalDate dataRilascio, int quantitaPagine, boolean copertinaPatinatata, boolean inUso) {
+        super(nome, dataRilascio, quantitaPagine, inUso);
+        this.copertinaPatinatata = copertinaPatinatata;
     }
 
-//metodi getter
-    public boolean isPatinata() {
-        return isPatinata;
+    public boolean verificaCopertinaPatinatata() {
+        return copertinaPatinatata;
     }
 
-//metodi setter
-    public void setPatinata(boolean isPatinata) {
-        this.isPatinata = isPatinata;
+    public void modificaCopertinaPatinatata(boolean copertinaPatinatata) {
+        this.copertinaPatinatata = copertinaPatinatata;
     }
+
     @Override
-    public void setDataRestituzione() {
-        this.dataRestituzione = LocalDate.now().plusDays(30);
+    public void impostaScadenzaPrestito() {
+        this.scadenzaPrestito = LocalDate.now().plusDays(30);
+        this.inUso = true;
     }
-//metodi
+
+    @Override
+    public String mostraDettagli() {
+        return super.mostraDettagli() + " | Copertina patinata: " + copertinaPatinatata;
+    }
+
+    @Override
     public String toString() {
-        return (super.toString() + ", isPatinata=" + isPatinata + "]");
+        return mostraDettagli();
     }
 }
